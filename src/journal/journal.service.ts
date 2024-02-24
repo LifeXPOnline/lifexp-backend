@@ -33,4 +33,9 @@ export class JournalService {
   async getEntryById(id: string) {
     return await this.entryModel.findById(id);
   }
+
+  async updateEntryById(id: string, changes: Partial<CreateEntryDto>) {
+    await this.entryModel.updateOne({_id: id}, changes);
+    return await this.getEntryById(id);
+  }
 }
