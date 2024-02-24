@@ -26,6 +26,8 @@ export class AuthService {
 
     async loginUser(loginUserDto: LoginUserDto) {
         const existingUser = await this.userService.getByUsername(loginUserDto.username, true);
+        if (!existingUser)
+          throw new HttpException(`Wrong credentials`, HttpStatus.UNAUTHORIZED);
         const success = await bcrypt.compare(loginUserDto.password, existingUser.password);
         if (success) {
             return {
