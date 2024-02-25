@@ -29,4 +29,17 @@ export class JournalService {
         throw new HttpException(`Could not create entry`, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
+
+  async getEntryById(id: string) {
+    return await this.entryModel.findById(id);
+  }
+
+  async updateEntryById(id: string, changes: Partial<CreateEntryDto>) {
+    await this.entryModel.updateOne({_id: id}, changes);
+    return await this.getEntryById(id);
+  }
+
+  async removeEntryById(id: string) {
+    return await this.entryModel.deleteOne({_id: id});
+  }
 }
