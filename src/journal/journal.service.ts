@@ -1,9 +1,10 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateEntryDto } from './dto/create-entry.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { Entry } from './schemas/entry.schema';
-import { Error, Model } from 'mongoose';
+import { Entry, EntryMood } from './schemas/entry.schema';
+import { Error, FilterQuery, Model } from 'mongoose';
 import { UsersService } from 'src/users/users.service';
+import { QueryOptions } from 'src/common/interfaces';
 
 @Injectable()
 export class JournalService {
@@ -41,5 +42,25 @@ export class JournalService {
 
   async removeEntryById(id: string) {
     return await this.entryModel.deleteOne({_id: id});
+  }
+
+  async getEntries(username: string, searchText?: string, mood?: EntryMood, queryOptions?: QueryOptions) {
+    const query: FilterQuery<Entry> = searchText ? {
+      $or: [
+        {title: {$regex: searchText, $options: 'i'}},
+        {content: {$regex: searchText, $options: 'i'}},
+      ]
+    } : {};
+    if (mood) {
+      query.mood = mood;
+    }
+    queryOptions = queryOptions ?? new QueryOptions();
+
+    return await this.entryModel.find({
+      ...query,
+      'createdBy.username': username,
+    }).sort(queryOptions.sort)
+      .limit(queryOptions.limit)
+      .skip(queryOptions.skip);
   }
 }

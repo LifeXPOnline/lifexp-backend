@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { JournalModule } from './journal/journal.module';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { JournalModule } from './journal/journal.module';
     AuthModule,
     UsersModule,
     JournalModule,
+    CommonModule,
   ],
   controllers: [AppController],
   providers: [AppService],
