@@ -13,10 +13,10 @@ export class JournalService {
     private readonly userService: UsersService,
   ) {}
 
-  async createEntry(username: string, journalEntry: CreateEntryDto) {
-    const createdBy = await this.userService.getByUsername(username);
+  async createEntry(email: string, journalEntry: CreateEntryDto) {
+    const createdBy = await this.userService.getByEmail(email);
     if (!createdBy)
-      throw new HttpException(`User ${username} does not exist`, HttpStatus.BAD_REQUEST);
+      throw new HttpException(`User ${email} does not exist`, HttpStatus.BAD_REQUEST);
     try {
       return await this.entryModel.create({
         ...journalEntry,
@@ -44,7 +44,7 @@ export class JournalService {
     return await this.entryModel.deleteOne({_id: id});
   }
 
-  async getEntries(username: string, searchText?: string, mood?: EntryMood, queryOptions?: QueryOptions) {
+  async getEntries(email: string, searchText?: string, mood?: EntryMood, queryOptions?: QueryOptions) {
     const query: FilterQuery<Entry> = searchText ? {
       $or: [
         {title: {$regex: searchText, $options: 'i'}},
@@ -58,7 +58,7 @@ export class JournalService {
 
     return await this.entryModel.find({
       ...query,
-      'createdBy.username': username,
+      'createdBy.email': email,
     }).sort(queryOptions.sort)
       .limit(queryOptions.limit)
       .skip(queryOptions.skip);

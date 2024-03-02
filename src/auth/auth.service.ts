@@ -13,9 +13,9 @@ export class AuthService {
     ) {}
 
     async registerUser(createUserDto: CreateUserDto) {
-        const existingUser = await this.userService.getByUsername(createUserDto.username);
+        const existingUser = await this.userService.getByEmail(createUserDto.email);
         if (existingUser)
-            throw new HttpException(`User with username ${createUserDto.username} already exists`, HttpStatus.BAD_REQUEST);
+            throw new HttpException(`User with email ${createUserDto.email} already exists`, HttpStatus.BAD_REQUEST);
         const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
         const createdUser = await this.userService.create({
             ...createUserDto,
@@ -25,14 +25,15 @@ export class AuthService {
     }
 
     async loginUser(loginUserDto: LoginUserDto) {
-        const existingUser = await this.userService.getByUsername(loginUserDto.username, true);
+        const existingUser = await this.userService.getByEmail(loginUserDto.email, true);
         if (!existingUser)
           throw new HttpException(`Wrong credentials`, HttpStatus.UNAUTHORIZED);
         const success = await bcrypt.compare(loginUserDto.password, existingUser.password);
         if (success) {
             return {
                 accessToken: this.jwtService.sign({
-                    username: existingUser.username,
+                    firstname: existingUser.firstname,
+                    lastname: existingUser.lastname,
                     email: existingUser.email,
                 })
             };

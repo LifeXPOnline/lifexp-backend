@@ -10,9 +10,6 @@ export class User {
   @Prop({
     index: true,
   })
-  username: string;
-
-  @Prop()
   email: string;
 
   @Prop({
