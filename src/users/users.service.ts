@@ -17,11 +17,11 @@ export class UsersService {
     return strippedUser;
   }
   
-  async getByUsername(username: string, includePassword = false): Promise<User|null> {
+  async getByEmail(email: string, includePassword = false): Promise<User|null> {
     let projection: string[] | undefined;
     if (includePassword)
       projection = ['+password'];
-    const user = await this.userModel.findOne({username}, projection);
+    const user = await this.userModel.findOne({email}, projection);
     return user;
   }
 }

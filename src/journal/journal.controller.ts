@@ -14,7 +14,7 @@ export class JournalController {
   @UseGuards(JwtGuard)
   @Post('entries')
   async createEntry(@Request() req: any, @Body() body: CreateEntryDto) {
-    return await this.journalService.createEntry(req.user?.username, body);
+    return await this.journalService.createEntry(req.user?.email, body);
   }
 
   @UseGuards(JwtGuard)
@@ -23,7 +23,7 @@ export class JournalController {
     const entry = await this.journalService.getEntryById(id);
     if (!entry)
       throw new HttpException(`Entry with id ${id} does not exist`, HttpStatus.NOT_FOUND);
-    if (entry.get('createdBy.username') !== req.user?.username)
+    if (entry.get('createdBy.email') !== req.user?.email)
       throw new HttpException(`Entry with id ${id} is not accessible`, HttpStatus.FORBIDDEN);
     return entry;
   }
@@ -43,7 +43,7 @@ export class JournalController {
     const entry = await this.journalService.getEntryById(id);
     if (!entry)
       return;
-    if (entry.get('createdBy.username') !== req.user?.username)
+    if (entry.get('createdBy.email') !== req.user?.email)
       throw new HttpException(`Entry with id ${id} is not accessible`, HttpStatus.FORBIDDEN);
     await this.journalService.removeEntryById(id);
     return;
@@ -61,7 +61,7 @@ export class JournalController {
   ) {
     console.log(sort)
     const entries = await this.journalService.getEntries(
-      req.user.username,
+      req.user.email,
       searchText,
       mood,
       new QueryOptions(sort, limit, skip),
