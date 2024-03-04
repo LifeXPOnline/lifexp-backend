@@ -1,38 +1,39 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  <a href="https://lifexponline.com">
+  <picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/LifeXPOnline/lifexp-backend/assets/10837495/69bb4cb8-a294-41cc-9d5f-22beb5aa8599">
+  <source media="(prefers-color-scheme: light)" srcset="https://github.com/LifeXPOnline/lifexp-backend/assets/10837495/ab37c8a3-f05c-49a1-9511-d25028680265">
+  <img alt="LifeXP logo" src="https://github.com/LifeXPOnline/lifexp-backend/assets/10837495/ab37c8a3-f05c-49a1-9511-d25028680265">
+</picture>
+    </a>
 </p>
+<!--
+  Logos for dark and light mode:
+  ![lifexp_logo_alpha_lightmode](https://github.com/LifeXPOnline/lifexp-backend/assets/10837495/ab37c8a3-f05c-49a1-9511-d25028680265)
+  ![lifexp_logo_alpha_darkmode](https://github.com/LifeXPOnline/lifexp-backend/assets/10837495/69bb4cb8-a294-41cc-9d5f-22beb5aa8599)
+-->
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+<p align="center">
+  <a href="https://lifexponline.com">LifeXPOnline.com</a>
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+LifeXP uniquely merges gamification with holistic tools for emotional well-being and personal growth. It steps beyond the realm of the common task management. It emerges as a versatile and customizable platform for life management, adept at enhancing productivity while nurturing emotional and physical health.
 
 ## Installation
 
 ```bash
 $ npm install
 ```
+Create a `.env` file at the root of the project:
+```dot
+MONGO_CONNECTION_URL=<a valid connection string to your MongoDB instance>
+JWT_SECRET=<any random sequence of characters>
+```
 
 ## Running the app
+
 
 ```bash
 # development
@@ -58,16 +59,6 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+Wanna contribute to this project, suggest new ideas or just hang out with our community? Join us on [Discord](https://discord.gg/C5Ekcj3CRX).
