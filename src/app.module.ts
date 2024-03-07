@@ -7,7 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { JournalModule } from './journal/journal.module';
 import { CommonModule } from './common/common.module';
-import { TasksModule } from './tasks/tasks.module';
+import { TasksModule } from './todo/tasks.module';
 
 @Module({
   imports: [
