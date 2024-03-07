@@ -19,10 +19,10 @@ import { JwtStrategy } from './jwt.strategy';
         secret: configService.get<string>('JWT_SECRET'),
         signOptions: { expiresIn: '1d' },
         jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      })
+      }),
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy]
+  providers: [AuthService, JwtStrategy],
 })
 export class AuthModule {}

@@ -16,7 +16,10 @@ export class JournalService {
   async createEntry(email: string, journalEntry: CreateEntryDto) {
     const createdBy = await this.userService.getByEmail(email);
     if (!createdBy)
-      throw new HttpException(`User ${email} does not exist`, HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        `User ${email} does not exist`,
+        HttpStatus.BAD_REQUEST,
+      );
     try {
       return await this.entryModel.create({
         ...journalEntry,
@@ -27,7 +30,10 @@ export class JournalService {
       if (e instanceof Error.ValidationError)
         throw new HttpException(`Invalid entry`, HttpStatus.BAD_REQUEST);
       else
-        throw new HttpException(`Could not create entry`, HttpStatus.INTERNAL_SERVER_ERROR);
+        throw new HttpException(
+          `Could not create entry`,
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
     }
   }
 
@@ -36,30 +42,39 @@ export class JournalService {
   }
 
   async updateEntryById(id: string, changes: Partial<CreateEntryDto>) {
-    await this.entryModel.updateOne({_id: id}, changes);
+    await this.entryModel.updateOne({ _id: id }, changes);
     return await this.getEntryById(id);
   }
 
   async removeEntryById(id: string) {
-    return await this.entryModel.deleteOne({_id: id});
+    return await this.entryModel.deleteOne({ _id: id });
   }
 
-  async getEntries(email: string, searchText?: string, mood?: EntryMood, queryOptions?: QueryOptions) {
-    const query: FilterQuery<Entry> = searchText ? {
-      $or: [
-        {title: {$regex: searchText, $options: 'i'}},
-        {content: {$regex: searchText, $options: 'i'}},
-      ]
-    } : {};
+  async getEntries(
+    email: string,
+    searchText?: string,
+    mood?: EntryMood,
+    queryOptions?: QueryOptions,
+  ) {
+    const query: FilterQuery<Entry> = searchText
+      ? {
+          $or: [
+            { title: { $regex: searchText, $options: 'i' } },
+            { content: { $regex: searchText, $options: 'i' } },
+          ],
+        }
+      : {};
     if (mood) {
       query.mood = mood;
     }
     queryOptions = queryOptions ?? new QueryOptions();
 
-    return await this.entryModel.find({
-      ...query,
-      'createdBy.email': email,
-    }).sort(queryOptions.sort)
+    return await this.entryModel
+      .find({
+        ...query,
+        'createdBy.email': email,
+      })
+      .sort(queryOptions.sort)
       .limit(queryOptions.limit)
       .skip(queryOptions.skip);
   }
