@@ -1,11 +1,11 @@
-# Base image
-FROM node:18-alpine
+# Build stage
+FROM node:18-alpine as builder
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /home/node
 
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-COPY --chown=node:node package*.json ./
+# Copy package.json, package-lock.json, tsconfig.json, etc...
+COPY --chown=node:node . .
 
 # Install app dependencies
 RUN npm ci
@@ -13,16 +13,18 @@ RUN npm ci
 # Creates a "dist" folder with the production build
 RUN npm run build
 
-# Bundle app source and dependencies
-COPY --chown=node:node dist ./dist
-COPY --chown=node:node node_modules ./node_modules
+# Production stage
+FROM node:18-alpine
 
 # Set Node.js to run in production mode
 ENV NODE_ENV production
 
-# Avoid running as root
 USER node
+WORKDIR /home/node
+
+COPY --from=builder --chown=node:node /home/node/package*.json ./
+COPY --from=builder --chown=node:node /home/node/node_modules/ ./node_modules/
+COPY --from=builder --chown=node:node /home/node/dist/ ./dist/
 
 # Start the server using the production build
-CMD [ "node", "main.js" ]
-
+CMD [ "node", "dist/main.js" ]
