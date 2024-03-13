@@ -11,6 +11,6 @@ import { MongooseModule } from '@nestjs/mongoose';
     MongooseModule.forFeature([{ name: Entry.name, schema: EntrySchema }]),
   ],
   controllers: [JournalController],
-  providers: [JournalService]
+  providers: [JournalService],
 })
 export class JournalModule {}

@@ -36,7 +36,7 @@ export class Entry {
       EntryMood.ANGRY,
       EntryMood.OK,
       EntryMood.HAPPY,
-    ]
+    ],
   })
   mood: string;
 
@@ -49,7 +49,7 @@ export class Entry {
 
 export const EntrySchema = SchemaFactory.createForClass(Entry);
 
-/* TODO: move this in EntryService because we might want 
+/* TODO: move this in EntryService because we might want
 to check user preferences for date formats first */
 function getTodayFormatted() {
   const n = LocalDate.now();

@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { JournalModule } from './journal/journal.module';
 import { CommonModule } from './common/common.module';
+import { TasksModule } from './todo/tasks.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { CommonModule } from './common/common.module';
     UsersModule,
     JournalModule,
     CommonModule,
+    TasksModule,
   ],
   controllers: [AppController],
   providers: [AppService],
