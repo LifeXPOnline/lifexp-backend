@@ -44,7 +44,7 @@ export class Entry {
     type: UserSchema.omit(['password']),
     required: true,
   })
-  createdBy: User;
+  createdBy: Omit<User, 'password'>;
 }
 
 export const EntrySchema = SchemaFactory.createForClass(Entry);
